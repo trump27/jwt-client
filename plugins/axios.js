@@ -1,9 +1,16 @@
-import Cookies from 'js-cookie'
-
-export default function ({ $axios }) {
+export default function ({ $axios, redirect, app, store }) {
   $axios.onRequest(config => {
-    if (!!Cookies.get('token')) {
-      config.headers.common['Authorization'] = 'Bearer ' + Cookies.get('token')
+    if (store.getters.isAuthenticated) {
+      config.headers.common['Authorization'] = 'Bearer ' + store.getters.getToken
+    }
+  })
+
+  $axios.onError(error => {
+    if (error.response.status === 401) {
+      // Unauthorized
+      store.commit("SET_TOKEN", null)
+      console.log('Tokenが無効です')
+      redirect('/signin')
     }
   })
 }

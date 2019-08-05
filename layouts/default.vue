@@ -79,9 +79,6 @@ export default {
       title: "JWT sample"
     };
   },
-  mounted() {
-    this.$store.commit("INIT_TOKEN");
-  },
   computed: {
     Authenticated: function() {
       return this.$store.getters.isAuthenticated

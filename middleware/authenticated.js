@@ -3,6 +3,5 @@ export default function ({ store, redirect }) {
   // ユーザーが認証されていないとき
   if (!store.getters.isAuthenticated) {
     return redirect('/signin')
-    // store.$router.push('/signin')
   }
 }

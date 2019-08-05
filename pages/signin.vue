@@ -50,7 +50,7 @@ export default {
       let req = { id: this.name, password: this.passwd };
       try {
         let res = await this.$axios.$post("/api/login", req);
-        console.log("res", res);
+        console.log("token", res.token);
         if (res.success) {
           this.$store.commit("SET_TOKEN", res.token);
           this.$router.push("/");
